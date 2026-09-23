@@ -22,24 +22,42 @@ end
 -- Encodes one character's craftable professions (gathering professions and
 -- professions with zero known recipes are skipped). Returns nil if the
 -- character has nothing craftable to report.
+--
+-- Guildhall's guild-wide table holds data relayed from *other* players'
+-- clients, not just what this client scanned itself -- so a stale/buggy
+-- Guildhall version (or a deliberately malformed relay) on any guildmate's
+-- end could hand this addon a non-numeric rank/level/recipe ID. Without
+-- tonumber() guards, string.format("%d",...)/table.concat/table.sort all
+-- throw a hard Lua error on that, breaking /ghe for whoever runs it --
+-- over one bad record anywhere in the guild, not just skipping it.
 local function EncodeCharacter(name, charData)
+	if type(charData) ~= "table" then
+		return nil
+	end
+
 	local profs = {}
-	for skillLineID, prof in pairs(charData.profs or {}) do
-		local isGathering = Guildhall.Scan and Guildhall.Scan.GATHERING_LINES
-			and Guildhall.Scan.GATHERING_LINES[skillLineID]
-		if not isGathering then
-			local recipeIDs = {}
-			for spellID in pairs(prof.recipes or {}) do
-				recipeIDs[#recipeIDs + 1] = spellID
-			end
-			if #recipeIDs > 0 then
-				table.sort(recipeIDs)
-				profs[#profs + 1] = {
-					id = skillLineID,
-					rank = prof.rank or 0,
-					max = prof.max or 0,
-					recipes = recipeIDs,
-				}
+	for skillLineIDRaw, prof in pairs(charData.profs or {}) do
+		local skillLineID = tonumber(skillLineIDRaw)
+		if skillLineID and type(prof) == "table" then
+			local isGathering = Guildhall.Scan and Guildhall.Scan.GATHERING_LINES
+				and Guildhall.Scan.GATHERING_LINES[skillLineID]
+			if not isGathering then
+				local recipeIDs = {}
+				for spellIDRaw in pairs(prof.recipes or {}) do
+					local spellID = tonumber(spellIDRaw)
+					if spellID then
+						recipeIDs[#recipeIDs + 1] = spellID
+					end
+				end
+				if #recipeIDs > 0 then
+					table.sort(recipeIDs)
+					profs[#profs + 1] = {
+						id = skillLineID,
+						rank = tonumber(prof.rank) or 0,
+						max = tonumber(prof.max) or 0,
+						recipes = recipeIDs,
+					}
+				end
 			end
 		end
 	end
@@ -62,8 +80,8 @@ local function EncodeCharacter(name, charData)
 		'"%s":{"class":"%s","level":%d,"rev":%d,"professions":{%s}}',
 		EscapeJSON(name),
 		EscapeJSON(charData.class or ""),
-		charData.level or 0,
-		charData.rev or 0,
+		tonumber(charData.level) or 0,
+		tonumber(charData.rev) or 0,
 		table.concat(profParts, ",")
 	)
 end

@@ -2,7 +2,7 @@
 ## Title: Guildhall Exporter
 ## Notes: Exports Guildhall's synced profession/recipe data for the Desperado Club crafting website.
 ## Author: Desperado Club
-## Version: 0.1.0
+## Version: 0.1.1
 ## OptionalDeps: Guildhall
 ## X-License: MIT
 
