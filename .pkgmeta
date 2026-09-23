@@ -1,0 +1,13 @@
+# Tells CurseForge's automatic packager (linked under the project's
+# Repository settings) to zip up only the actual addon folder -- everything
+# else in this repo (docs, the Lua test suite) is dev-only and has no
+# business ending up in someone's AddOns folder.
+# Docs: https://support.curseforge.com/support/solutions/articles/9000197952
+
+package-as: GuildhallExporter
+
+ignore:
+    - test
+    - README.md
+    - LICENSE
+    - .github
