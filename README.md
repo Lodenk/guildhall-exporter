@@ -1,9 +1,9 @@
 # Guildhall Exporter
 
-WoW: Forever addon for **The Desperado Club**. Reads profession/recipe data
-that [Guildhall](https://github.com/vBaustad/Guildhall) has already scanned
-and synced across the guild, and formats it into a JSON blob you can paste
-into the guild website's crafting-database importer.
+WoW: Forever companion addon for [Guildhall](https://github.com/vBaustad/Guildhall).
+Reads profession/recipe data Guildhall has already scanned and synced across
+your guild, and formats it into a JSON blob you can paste into a guild
+website's crafting-database importer.
 
 This addon does **no scanning or syncing of its own** — it requires
 [Guildhall](https://www.curseforge.com/wow/addons/guildhall) to be installed
@@ -16,7 +16,7 @@ Guildhall's job; this addon just reads its tables and prints them.
    normally (it syncs profession data with the guild automatically).
 2. Type `/ghe` (mirrors Guildhall's own `/gh` command style).
 3. Click **Generate**. The export is selected automatically — press Ctrl+C.
-4. Paste into the Desperado Club website's crafting import tool.
+4. Paste into your guild website's crafting import tool.
 
 If you're not in a guild yet, or Guildhall hasn't synced with anyone, the
 export still includes your own characters' known recipes.
@@ -26,7 +26,7 @@ export still includes your own characters' known recipes.
 ```json
 {
   "schema": "GUILDHALL_EXPORTER_V1",
-  "guild": "The Desperado Club-Emberstorm",
+  "guild": "Your Guild Name-Emberstorm",
   "generatedBy": "Bob-Emberstorm",
   "generatedAt": 1758000000,
   "characters": {

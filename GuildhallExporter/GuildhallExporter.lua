@@ -1,7 +1,7 @@
 -- Guildhall Exporter
 -- Reads Guildhall's own-character and synced-guild profession/recipe tables and
--- serializes them into a copyable JSON blob for the Desperado Club website's
--- crafting-database import. Does no scanning or syncing of its own -- Guildhall
+-- serializes them into a copyable JSON blob for a guild crafting-database
+-- website's import tool. Does no scanning or syncing of its own -- Guildhall
 -- already does that; this addon only reads Guildhall's tables and formats them.
 
 local GHE = {}

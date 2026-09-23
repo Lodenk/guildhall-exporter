@@ -49,7 +49,7 @@ assertContains(json2, '"guild":""', "solo export should have empty guild key")
 
 -- 3. In a guild -- own char + a synced guild member both present, and a
 --    duplicate of the owner's own name in the guild cache doesn't double up.
-_G.Guildhall.GuildKey = function() return "The Desperado Club-Emberstorm" end
+_G.Guildhall.GuildKey = function() return "Some Guild-Emberstorm" end
 _G.Guildhall.GuildDB = function()
 	return {
 		members = {
@@ -66,7 +66,7 @@ local json3, err3, count3 = GuildhallExporter.BuildExportJSON()
 assert(json3 and not err3, "guild export should succeed")
 assert(count3 == 2, "expected 2 distinct characters (no duplicate self), got " .. tostring(count3))
 assertContains(json3, '"Patrick-Emberstorm"')
-assertContains(json3, '"guild":"The Desperado Club-Emberstorm"')
+assertContains(json3, '"guild":"Some Guild-Emberstorm"')
 
 -- 4. Corrupted/adversarial data -- this can arrive relayed from *any*
 --    guildmate's Guildhall client (a stale version, a bug, or a deliberately
