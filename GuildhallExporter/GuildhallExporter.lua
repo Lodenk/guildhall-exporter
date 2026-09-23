@@ -7,7 +7,7 @@
 local GHE = {}
 _G.GuildhallExporter = GHE
 
-GHE.SCHEMA = "DESPERADO_CRAFTS_V1"
+GHE.SCHEMA = "GUILDHALL_EXPORTER_V1"
 
 local function EscapeJSON(str)
 	str = tostring(str)

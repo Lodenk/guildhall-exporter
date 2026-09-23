@@ -25,7 +25,7 @@ export still includes your own characters' known recipes.
 
 ```json
 {
-  "schema": "DESPERADO_CRAFTS_V1",
+  "schema": "GUILDHALL_EXPORTER_V1",
   "guild": "The Desperado Club-Emberstorm",
   "generatedBy": "Bob-Emberstorm",
   "generatedAt": 1758000000,
