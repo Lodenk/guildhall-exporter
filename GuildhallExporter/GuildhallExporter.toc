@@ -2,7 +2,7 @@
 ## Title: Guildhall Exporter
 ## Notes: Exports Guildhall's synced profession/recipe data as JSON for a guild crafting-database website.
 ## Author: Lodenk
-## Version: 0.1.1
+## Version: 1.0.0
 ## OptionalDeps: Guildhall
 ## X-License: MIT
 
